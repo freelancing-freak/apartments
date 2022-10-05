@@ -23,3 +23,7 @@ management:
     web:
       exposure:
         include: '*'
+
+cors:
+  origins:
+    - http://localhost:3000

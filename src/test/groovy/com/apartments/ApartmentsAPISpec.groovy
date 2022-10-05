@@ -8,7 +8,7 @@ import spock.lang.Specification
 
 @SpringBootTest
 @ActiveProfiles("test")
-class ApartmentsSpec extends Specification {
+class ApartmentsAPISpec extends Specification {
 
     @Autowired
     private ApplicationContext context
