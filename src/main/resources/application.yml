@@ -1,0 +1,25 @@
+spring:
+
+  profiles:
+    default: local
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/apartments
+    username: postgres
+    password: admin
+    driverClassName: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddlAuto: validate
+    open-in-view: false
+
+  sql:
+    init:
+      mode: never
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
