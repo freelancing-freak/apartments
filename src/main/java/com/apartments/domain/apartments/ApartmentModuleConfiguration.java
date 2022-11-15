@@ -10,11 +10,13 @@ class ApartmentModuleConfiguration {
 
     @Bean
     ApartmentFacade apartmentFacade(ApartmentRepository repository) {
-        return new ApartmentFacade(repository);
+        ApartmentValidator validator = new ApartmentValidator();
+        return new ApartmentFacade(repository, validator);
     }
 
     ApartmentFacade apartmentFacade(ConcurrentHashMap<Long, ApartmentEntity> db) {
+        ApartmentValidator validator = new ApartmentValidator();
         ApartmentInMemoryRepository repository = new ApartmentInMemoryRepository(db);
-        return new ApartmentFacade(repository);
+        return new ApartmentFacade(repository, validator);
     }
 }

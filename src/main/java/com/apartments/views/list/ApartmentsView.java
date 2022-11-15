@@ -2,6 +2,7 @@ package com.apartments.views.list;
 
 import com.apartments.domain.apartments.Apartment;
 import com.apartments.domain.apartments.ApartmentFacade;
+import com.apartments.domain.apartments.exception.InvalidApartmentException;
 import com.apartments.shared.UINotifications;
 import com.apartments.views.MainLayout;
 import com.vaadin.flow.component.button.Button;
@@ -31,11 +32,9 @@ public class ApartmentsView extends VerticalLayout {
     ApartmentForm form;
 
     private final ApartmentFacade facade;
-    private final UINotifications uiNotifications;
 
-    public ApartmentsView(ApartmentFacade facade, UINotifications uiNotifications) {
+    public ApartmentsView(ApartmentFacade facade) {
         this.facade = facade;
-        this.uiNotifications = uiNotifications;
 
         addClassName("list-view");
         setSizeFull();
@@ -44,7 +43,7 @@ public class ApartmentsView extends VerticalLayout {
         form = new ApartmentForm();
         form.setWidth("25em");
         form.addListener(ApartmentForm.SaveEvent.class, this::saveApartment);
-        form.addListener(ApartmentForm.DeleteEvent.class, this::deleteApartment);
+        form.addListener(ApartmentForm.DeleteEvent.class, this::delete);
         form.addListener(ApartmentForm.CloseEvent.class, e -> closeEditor());
 
         FlexLayout content = new FlexLayout(grid, form);
@@ -84,22 +83,47 @@ public class ApartmentsView extends VerticalLayout {
     private void saveApartment(ApartmentForm.SaveEvent event) {
         Apartment apartment = event.getApartment();
         if (Objects.isNull(apartment.getId())) {
-            facade.save(apartment);
-            uiNotifications.success("Dodano nowy apartament");
+            save(apartment);
         } else {
-            facade.update(apartment);
-            uiNotifications.success("Zaktualizowano apartament o id: " + apartment.getId());
+            update(apartment);
         }
-        updateList();
-        closeEditor();
     }
 
-    private void deleteApartment(ApartmentForm.DeleteEvent event) {
+    private void save(Apartment apartment) {
+        try {
+            facade.save(apartment);
+            UINotifications.success("Dodano nowy apartament");
+            updateList();
+            closeEditor();
+        } catch (InvalidApartmentException e) {
+            UINotifications.error(e.getMessage());
+        }
+    }
+
+    private void update(Apartment apartment) {
+        try {
+            facade.update(apartment);
+            UINotifications.success("Zaktualizowano apartament o id: " + apartment.getId());
+            updateList();
+            closeEditor();
+        } catch (InvalidApartmentException e) {
+            UINotifications.error(e.getMessage());
+        }
+    }
+
+    private void delete(ApartmentForm.DeleteEvent event) {
         Apartment apartment = event.getApartment();
-        facade.delete(apartment);
-        uiNotifications.success("Usunięto apartament o id: " + apartment.getId());
-        updateList();
-        closeEditor();
+        if (Objects.isNull(apartment.getId())) {
+            return;
+        }
+        try {
+            facade.delete(apartment);
+            UINotifications.success("Usunięto apartament o id: " + apartment.getId());
+            updateList();
+            closeEditor();
+        } catch (InvalidApartmentException e) {
+            UINotifications.error(e.getMessage());
+        }
     }
 
     public void editApartment(Apartment apartment) {

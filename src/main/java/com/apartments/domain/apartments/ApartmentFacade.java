@@ -13,8 +13,10 @@ import java.util.List;
 public class ApartmentFacade {
 
     private final ApartmentRepository repository;
+    private final ApartmentValidator validator;
 
     public void save(Apartment apartment) {
+        validator.validate(apartment);
         repository.save(ApartmentEntityFactory.create(apartment));
     }
 
@@ -44,7 +46,10 @@ public class ApartmentFacade {
 
     @Transactional
     public void update(Apartment apartment) {
-        repository.findById(apartment.getId()).ifPresent(foundApartment -> foundApartment.update(apartment));
+        repository.findById(apartment.getId()).ifPresent(foundApartment -> {
+            validator.validate(apartment);
+            foundApartment.update(apartment);
+        });
     }
 
     @Transactional
