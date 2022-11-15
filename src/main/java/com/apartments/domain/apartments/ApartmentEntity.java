@@ -44,7 +44,7 @@ public class ApartmentEntity extends BaseEntity {
     public Apartment from() {
         Apartment apartment = new Apartment();
         apartment.setId(this.getId());
-        apartment.setCreatedDate(this.getCreatedDate());
+        apartment.setCreatedDate(this.getCreatedDate().toLocalDate());
         apartment.setName(this.name);
         apartment.setDescription(this.description);
         apartment.setLocation(this.location);

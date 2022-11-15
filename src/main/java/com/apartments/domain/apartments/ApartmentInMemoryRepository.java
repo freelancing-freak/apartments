@@ -29,6 +29,11 @@ public class ApartmentInMemoryRepository implements ApartmentRepository {
     }
 
     @Override
+    public List<ApartmentEntity> search(String filterText) {
+        return null;
+    }
+
+    @Override
     public List<ApartmentEntity> findAll() {
         return null;
     }

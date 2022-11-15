@@ -64,7 +64,7 @@ public class ApartmentsView extends VerticalLayout {
     }
 
     private HorizontalLayout getToolbar() {
-        filterText.setPlaceholder("Filtrowanie po nazwie ...");
+        filterText.setPlaceholder("Filtrowanie ...");
         filterText.setClearButtonVisible(true);
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
         filterText.addValueChangeListener(e -> updateList());

@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -22,18 +23,22 @@ public class ApartmentFacade {
         return new PageImpl<>(apartments
                 .stream()
                 .map(ApartmentVO::from)
+                .sorted(Comparator.comparing(ApartmentVO::id))
                 .toList(), pageable, apartments.getTotalElements());
     }
 
     public List<Apartment> findAll(String filterText) {
-//        if (filterText == null || filterText.isEmpty()) {
-//
-//        } else {
-//            return repository.search(filterText);
-//        }
-        return repository.findAll()
+        if (filterText == null || filterText.isEmpty()) {
+            return repository.findAll()
+                    .stream()
+                    .map(ApartmentEntity::from)
+                    .sorted(Comparator.comparing(Apartment::getId))
+                    .toList();
+        }
+        return repository.search(filterText)
                 .stream()
                 .map(ApartmentEntity::from)
+                .sorted(Comparator.comparing(Apartment::getId))
                 .toList();
     }
 

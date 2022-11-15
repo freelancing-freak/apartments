@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -12,7 +12,7 @@ import java.time.ZonedDateTime;
 public class Apartment {
 
     private Long id;
-    private ZonedDateTime createdDate;
+    private LocalDate createdDate;
     private String name;
     private String description;
     private String location;
