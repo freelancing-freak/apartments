@@ -1,6 +1,5 @@
 package com.apartments.domain.apartments
 
-import com.apartments.application.api.dto.ApartmentRequest
 import org.springframework.data.domain.Pageable
 import spock.lang.Specification
 
@@ -19,7 +18,7 @@ class ApartmentSpec extends Specification {
 
     def 'Should save apartment'() {
         when:
-        apartmentFacade.save(new ApartmentRequest('apartment',
+        apartmentFacade.save(new Apartment('apartment',
                 'some desc',
                 'barcelona',
                 'some src',
@@ -35,7 +34,7 @@ class ApartmentSpec extends Specification {
 
     def 'Should find all apartments'() {
         given:
-        apartmentFacade.save(new ApartmentRequest('apartment',
+        apartmentFacade.save(new Apartment('apartment',
                 'some desc',
                 'barcelona',
                 'some src',

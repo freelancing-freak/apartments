@@ -1,28 +1,33 @@
 package com.apartments.domain.apartments;
 
-import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record Apartment(long id,
-                        String name,
-                        String description,
-                        String location,
-                        String locationSrc,
-                        int measurement,
-                        int numberOfRooms,
-                        String price,
-                        String mainImage,
-                        Set<String> images) {
+import java.time.ZonedDateTime;
 
-    public static Apartment from(ApartmentEntity entity) {
-        return new Apartment(entity.getId(),
-                entity.getName(),
-                entity.getDescription(),
-                entity.getLocation(),
-                entity.getLocationSrc(),
-                entity.getMeasurement(),
-                entity.getNumberOfRooms(),
-                entity.getPrice(),
-                entity.getMainImage(),
-                entity.getImages());
-    }
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Apartment {
+
+    private Long id;
+    private ZonedDateTime createdDate;
+    private String name;
+    private String description;
+    private String location;
+    private String locationSrc;
+    private int measurement;
+    private int numberOfRooms;
+    private String price;
+    private String mainImage;
+    private String image1;
+    private String image2;
+    private String image3;
+    private String image4;
+    private String image5;
+    private String image6;
+    private String image7;
+    private String image8;
+    private String image9;
 }

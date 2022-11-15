@@ -6,6 +6,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @RequiredArgsConstructor
@@ -24,5 +26,20 @@ public class ApartmentInMemoryRepository implements ApartmentRepository {
     @Override
     public Page<ApartmentEntity> findAll(Pageable pageable) {
         return new PageImpl<>(new ArrayList<>(db.values()), pageable, db.values().size());
+    }
+
+    @Override
+    public List<ApartmentEntity> findAll() {
+        return null;
+    }
+
+    @Override
+    public Optional<ApartmentEntity> findById(long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public void deleteById(long id) {
+
     }
 }
