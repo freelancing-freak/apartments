@@ -2,6 +2,7 @@ package com.apartments.views.list;
 
 import com.apartments.domain.apartments.Apartment;
 import com.apartments.domain.apartments.ApartmentFacade;
+import com.apartments.shared.UINotifications;
 import com.apartments.views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -30,9 +31,12 @@ public class ApartmentsView extends VerticalLayout {
     ApartmentForm form;
 
     private final ApartmentFacade facade;
+    private final UINotifications uiNotifications;
 
-    public ApartmentsView(ApartmentFacade facade) {
+    public ApartmentsView(ApartmentFacade facade, UINotifications uiNotifications) {
         this.facade = facade;
+        this.uiNotifications = uiNotifications;
+
         addClassName("list-view");
         setSizeFull();
         configureGrid();
@@ -81,15 +85,19 @@ public class ApartmentsView extends VerticalLayout {
         Apartment apartment = event.getApartment();
         if (Objects.isNull(apartment.getId())) {
             facade.save(apartment);
+            uiNotifications.success("Dodano nowy apartament");
         } else {
             facade.update(apartment);
+            uiNotifications.success("Zaktualizowano apartament o id: " + apartment.getId());
         }
         updateList();
         closeEditor();
     }
 
     private void deleteApartment(ApartmentForm.DeleteEvent event) {
-        facade.delete(event.getApartment());
+        Apartment apartment = event.getApartment();
+        facade.delete(apartment);
+        uiNotifications.success("Usunięto apartament o id: " + apartment.getId());
         updateList();
         closeEditor();
     }
