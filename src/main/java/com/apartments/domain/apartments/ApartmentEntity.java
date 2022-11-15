@@ -58,6 +58,9 @@ public class ApartmentEntity extends BaseEntity {
     }
 
     private void setImages(Apartment apartment) {
+        if (this.images == null || this.images.isEmpty()) {
+            return;
+        }
         if (isIndexExists(0)) apartment.setImage1(this.images.get(0));
         if (isIndexExists(1)) apartment.setImage2(this.images.get(1));
         if (isIndexExists(2)) apartment.setImage3(this.images.get(2));
@@ -70,9 +73,6 @@ public class ApartmentEntity extends BaseEntity {
     }
 
     private boolean isIndexExists(int index) {
-        if (this.images == null || this.images.isEmpty()) {
-            return false;
-        }
         return this.images.size() > index;
     }
 }
