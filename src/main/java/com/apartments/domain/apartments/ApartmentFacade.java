@@ -53,7 +53,7 @@ public class ApartmentFacade {
     }
 
     @Transactional
-    public void delete(Apartment apartment) {
-        repository.deleteById(apartment.getId());
+    public void deleteById(long id) {
+        repository.deleteById(id);
     }
 }

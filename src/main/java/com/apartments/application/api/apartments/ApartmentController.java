@@ -1,4 +1,4 @@
-package com.apartments.application.api;
+package com.apartments.application.api.apartments;
 
 import com.apartments.domain.apartments.ApartmentFacade;
 import com.apartments.domain.apartments.ApartmentVO;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/apartments")
 @RequiredArgsConstructor
-public class ApartmentController {
+class ApartmentController {
 
     private final ApartmentFacade facade;
 

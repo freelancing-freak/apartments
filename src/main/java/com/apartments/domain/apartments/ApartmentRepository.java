@@ -15,10 +15,10 @@ interface ApartmentRepository extends Repository<ApartmentEntity, Long> {
     Page<ApartmentEntity> findAll(Pageable pageable);
 
     @Query("select a from ApartmentEntity a " +
-            "where lower(a.name) like lower(concat('%', :searchTerm, '%')) " +
-            "or lower(a.location) like lower(concat('%', :searchTerm, '%')) " +
-            "or lower(a.price) like lower(concat('%', :searchTerm, '%'))")
-    List<ApartmentEntity> search(String searchTerm);
+            "where lower(a.name) like lower(concat('%', :filterText, '%')) " +
+            "or lower(a.location) like lower(concat('%', :filterText, '%')) " +
+            "or lower(a.price) like lower(concat('%', :filterText, '%'))")
+    List<ApartmentEntity> search(String filterText);
 
     List<ApartmentEntity> findAll();
 

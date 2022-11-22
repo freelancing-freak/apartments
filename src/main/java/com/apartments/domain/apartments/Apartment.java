@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class Apartment {
 
     private Long id;
-    private LocalDate createdDate;
+    private String createdDate;
     private String name;
     private String description;
     private String location;
@@ -21,13 +21,5 @@ public class Apartment {
     private int numberOfRooms;
     private String price;
     private String mainImage;
-    private String image1;
-    private String image2;
-    private String image3;
-    private String image4;
-    private String image5;
-    private String image6;
-    private String image7;
-    private String image8;
-    private String image9;
+    private List<String> images;
 }

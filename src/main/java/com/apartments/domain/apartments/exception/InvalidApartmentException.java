@@ -1,6 +1,6 @@
 package com.apartments.domain.apartments.exception;
 
-import com.apartments.shared.ValidationException;
+import com.apartments.shared.exception.ValidationException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

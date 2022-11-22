@@ -13,14 +13,11 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequiredArgsConstructor
 public class ApartmentInMemoryRepository implements ApartmentRepository {
 
-    private final ConcurrentHashMap<Long, ApartmentEntity> db;
-
-    private static long idCounter = 0;
+    private final ConcurrentHashMap<String, ApartmentEntity> db;
 
     @Override
     public void save(ApartmentEntity entity) {
-        entity.setId(++idCounter);
-        db.put(idCounter, entity);
+        db.put(entity.getName(), entity);
     }
 
     @Override
@@ -30,21 +27,32 @@ public class ApartmentInMemoryRepository implements ApartmentRepository {
 
     @Override
     public List<ApartmentEntity> search(String filterText) {
-        return null;
+        return db.values()
+                .stream()
+                .filter(apartment -> {
+                    boolean filterByName = apartment.getName().toLowerCase().contains(filterText.toLowerCase());
+                    boolean filterByLocation = apartment.getLocation().toLowerCase().contains(filterText.toLowerCase());
+                    boolean filterByPrice = apartment.getPrice().toLowerCase().contains(filterText.toLowerCase());
+                    return filterByName || filterByLocation || filterByPrice;
+                })
+                .toList();
     }
 
     @Override
     public List<ApartmentEntity> findAll() {
-        return null;
+        return new ArrayList<>(db.values());
     }
 
     @Override
     public Optional<ApartmentEntity> findById(long id) {
-        return Optional.empty();
+        return db.values()
+                .stream()
+                .filter(apartment -> apartment.getId() == id)
+                .findFirst();
     }
 
     @Override
     public void deleteById(long id) {
-
+        db.values().removeIf(apartment -> apartment.getId() == id);
     }
 }

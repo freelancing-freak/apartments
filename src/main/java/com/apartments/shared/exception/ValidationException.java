@@ -1,8 +1,11 @@
-package com.apartments.shared;
+package com.apartments.shared.exception;
 
+import lombok.Getter;
+
+@Getter
 public abstract class ValidationException extends RuntimeException {
 
-    public static String label;
+    private final String label;
 
     public ValidationException(String message) {
         super(message);

@@ -14,7 +14,7 @@ class ApartmentModuleConfiguration {
         return new ApartmentFacade(repository, validator);
     }
 
-    ApartmentFacade apartmentFacade(ConcurrentHashMap<Long, ApartmentEntity> db) {
+    ApartmentFacade apartmentFacade(ConcurrentHashMap<String, ApartmentEntity> db) {
         ApartmentValidator validator = new ApartmentValidator();
         ApartmentInMemoryRepository repository = new ApartmentInMemoryRepository(db);
         return new ApartmentFacade(repository, validator);
