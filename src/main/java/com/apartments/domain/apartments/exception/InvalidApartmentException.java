@@ -16,7 +16,8 @@ public class InvalidApartmentException extends ValidationException {
         EMPTY_MEASUREMENT("Proszę podać metraż"),
         EMPTY_NUMBER_OF_ROOMS("Proszę podać liczbę pokoi"),
         EMPTY_PRICE("Proszę podać cenę"),
-        EMPTY_MAIN_IMAGE("Proszę podać link do głównego zdjęcia");
+        EMPTY_MAIN_IMAGE("Proszę podać link do głównego zdjęcia"),
+        MINIMUM_SINGLE_IMAGE_IS_REQUIRED("Proszę podać przynajmniej jedno zdjęcie oprócz głównego");
 
         final String message;
     }

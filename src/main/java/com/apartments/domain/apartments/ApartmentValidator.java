@@ -24,6 +24,8 @@ public class ApartmentValidator {
             cause = InvalidApartmentException.CAUSE.EMPTY_PRICE;
         } else if (isBlankOrEmpty(apartment.getMainImage())) {
             cause = InvalidApartmentException.CAUSE.EMPTY_MAIN_IMAGE;
+        } else if (apartment.getImages() == null || apartment.getImages().size() < 1) {
+            cause = InvalidApartmentException.CAUSE.MINIMUM_SINGLE_IMAGE_IS_REQUIRED;
         }
         if (cause != null) {
             throw new InvalidApartmentException(cause);

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +22,10 @@ class ApartmentController {
     @GetMapping
     public PageResponse<ApartmentVO> findAll(@PageableDefault(value = 12) Pageable pageable) {
         return PageUtil.toPageResponse(facade.findAll(pageable));
+    }
+
+    @GetMapping("{id}")
+    public ApartmentVO findById(@PathVariable long id) {
+        return facade.findById(id);
     }
 }

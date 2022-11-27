@@ -68,6 +68,29 @@ class ApartmentSpec extends Specification implements ApartmentFixture {
         !apartments.isEmpty() && apartments.size() == 2
     }
 
+    def 'Should find apartment by id'() {
+        given:
+        def id = 0L
+        def apartment = create('Złota 44', id)
+
+        apartmentFacade.save(apartment)
+
+        when:
+        def foundApartment = apartmentFacade.findById(apartment.id)
+
+        then:
+        foundApartment != null
+    }
+
+    def 'Should throw exception when cannot find apartment by id'() {
+        when:
+        apartmentFacade.findById(-1L)
+
+        then: 'exception is thrown'
+        RuntimeException exception = thrown()
+        exception.message == 'Cannot find apartment by id'
+    }
+
     def 'Should update apartment'() {
         given:
         def name = 'Złota 44'

@@ -44,6 +44,12 @@ public class ApartmentFacade {
                 .toList();
     }
 
+    public ApartmentVO findById(long id) {
+        return repository.findById(id)
+                .map(ApartmentVO::from)
+                .orElseThrow(() -> new RuntimeException("Cannot find apartment by id"));
+    }
+
     @Transactional
     public void update(Apartment apartment) {
         repository.findById(apartment.getId()).ifPresent(foundApartment -> {
