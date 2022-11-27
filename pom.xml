@@ -17,11 +17,13 @@
 
     <properties>
         <java.version>17</java.version>
+
         <hibernate-types-52.version>2.19.2</hibernate-types-52.version>
         <flyway.version>9.4.0</flyway.version>
         <lombok.version>1.18.24</lombok.version>
+
         <spock.version>2.3-groovy-4.0</spock.version>
-        <gmavenplus-plugin.version>1.12.0</gmavenplus-plugin.version>
+        <gmavenplus-plugin.version>1.13.0</gmavenplus-plugin.version>
         <maven-sunfire-plugin.version>3.0.0-M4</maven-sunfire-plugin.version>
     </properties>
 
