@@ -23,4 +23,6 @@ management:
 
 cors:
   origins:
+    - http://localhost:3000
     - https://vaadin-apartments-prod.herokuapp.com
+    - https://react-apartments-prod.herokuapp.com
