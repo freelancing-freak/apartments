@@ -20,7 +20,7 @@ class ApartmentController {
     private final ApartmentFacade facade;
 
     @GetMapping
-    public PageResponse<ApartmentVO> findAll(@PageableDefault(value = 12) Pageable pageable) {
+    public PageResponse<ApartmentVO> findAll(@PageableDefault(value = 36) Pageable pageable) {
         return PageUtil.toPageResponse(facade.findAll(pageable));
     }
 
